@@ -1,1 +1,62 @@
-{{outlet}}
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>Live Reload</h2>
+  </header>
+  <hr>
+  <p>Live reload takes the standard ember serve live reload behaviour to ember-cordova apps.</p>
+
+  <p>Live reload apps can still access Cordova plugins and work on emulators and physical devices.</p>
+
+  <p><strong>Caveats</strong></p>
+
+  <ul>
+    <li>
+      <p>Live reload is not for production environments. It is not a solution for delivering over the air updates in a production context.</p>
+    </li>
+    <li>
+      <p>Your computer and phone/device must be on the same network.</p>
+    </li>
+  </ul>
+
+  <h4>Usage</h4>
+
+  <div><pre><code>  ember cdv:serve
+  ember cdv:s --environment=staging --platform=android
+  </code></pre>
+  </div>
+
+  <p>Some whitelisting may be required in config.xml, which ember-cordova will guide you through. For options, see the {{#link-to 'core.cli-reference' class="wrapper"}}cli reference{{/link-to}}.</p>
+
+  <p>At a high level, this command builds a cordova container app, and then starts a slightly modified ember serve.
+  Once serve is running, deploy the newly generated app to a device/emulator as explained in {{#link-to 'workflow.building' class="wrapper"}}build workflow{{/link-to}}.</p>
+
+  <p>Code changes should immediately resolve on your device. If you are having further troubles, you likely need to customize the device live-reload url.</p>
+
+  <h4>Additional Android Steps</h4>
+
+  <p>The whitelist plugin is also required for Android &gt;4.0:
+  <code>ember cdv:plugin add cordova-plugin-whitelist</code></p>
+
+  <h4>Customize the device live-reload url</h4>
+
+  <p>Livereload works by redirecting the cordova apps window.location from file://index.html to your locally running serve instance.
+  In general, we detect and automatically set these values for you.</p>
+
+  <p>There are times you may need to run live-reload from a remote host and port, or to customize a local url because we are not detecting it correctly.</p>
+
+  <p>In all cases below, <code>&lt;url&gt;</code> refers to the full url including protocol,
+  host, and port, e.g. http://localhost:4200</p>
+
+  <p><em>via commandline arg</em></p>
+
+  <pre><code>ember cdv:serve --reload-url="&lt;url&gt;"
+  </code></pre>
+
+  <p><em>via .ember-cli</em></p>
+
+  <div><pre><code><span class="w">  </span><span class="err">reloadUrl:</span><span class="w"> </span><span class="s2">"&lt;url&gt;"</span><span class="w">
+  </span></code></pre>
+  </div>
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>

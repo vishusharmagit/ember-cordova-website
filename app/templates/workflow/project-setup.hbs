@@ -1,1 +1,64 @@
-OM
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>Project Setup</h2>
+  </header>
+  <hr>
+  <h4>Required Ember App Changes</h4>
+
+  <p>There are a few changes required to make sure your app will work in a Cordova context. You’ll get a warning if you forget. <em>These changes are not required for standalone Glimmer applications.</em></p>
+
+  <p>In <code>config/environment.js</code>:</p>
+
+  <p>1) Set locationType to ‘hash’.</p>
+
+  <p>2) Ensure {{rootURL}} or {{baseURL}} dont have a leading forward slash. Any hardcoded assets with a leading slash will fail to load.</p>
+
+  <p>e.g. change <code>rootURL: '/',</code> to <code>rootURL: '',</code> in <code>config/environment.js</code></p>
+
+  <h4>ENV Setup for App Compilation</h4>
+
+  <p>To build for iOS and Android, you will need Xcode or Android Studio installed.</p>
+  <p>The Cordova team has published a solid set of instructions for <a class="wrapper" target="_blank" href="https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html">iOS</a> and <a class="wrapper" target="_blank" href="https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html">Android</a>.</p>
+
+  <h4>Adding Platforms</h4>
+
+  <p>Each platform you wish to build with must be added manually, ember-cordova comes with no platforms by default.</p>
+
+  <pre><code class="language-cli">ember cdv:platform add ios
+  <br>ember cdv:platform add android</code></pre>
+
+  <p>Available platforms are:</p>
+  <ul>
+    <li>ios</li>
+    <li>android</li>
+    <li>blackberry</li>
+    <li>windows</li>
+  </ul>
+
+  <p>Browser as a platform will be respected, but does not imply ‘webbrowser’.
+  Some Cordova plugins have a browser mode to enable easier testing. For standard builds &amp; livereload do not use browser - see the Workflow section.</p>
+
+  <h4>Comitting &amp; .gitignore</h4>
+
+  <p>On install, ember-cordova will update your gitignore.</p>
+
+  <p>First, you will want to check in the <em>empty</em> ember-cordova/www / plugin / platform directories.
+  ember-cordova maintains these as empty folders with a .gitkeep to avoid problems with Cordova APIs.</p>
+
+  <p><code>config.xml</code> should also be checked in, which is the Cordova equivalent of <code>package.json</code>.</p>
+
+  <h4>Cloning &amp; Plugin/Platform re-installs</h4>
+
+  <p>If you install plugins &amp; platforms with <code>ember cdv:plugin/platform</code>
+  commands, you will notice they are added to <code>ember-cordova/cordova/config.xml</code>.</p>
+
+  <p>Users cloning the repo can run <code>ember cdv:prepare</code> to install existing
+  platforms and plugins, similar to npm install. See the {{#link-to 'core.cli-reference' class="wrapper"}}CLI{{/link-to}}.</p>
+
+  <h4>Next</h4>
+
+  <p>Once everything is set up, you are ready to start using the CLI. See {{#link-to 'workflow.building' class="wrapper"}}building{{/link-to}} and {{#link-to 'workflow.livereload' class="wrapper"}}livereload{{/link-to}} for more.</p>
+
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

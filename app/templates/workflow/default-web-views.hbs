@@ -1,1 +1,33 @@
-{{outlet}}
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2><a href="javascript:;">Default Webviews</a></h2>
+  </header>
+  <hr>
+  <p>The default Cordova WebViews are not always the most performant option. ember-cordova initializes your platform with the most performant web view if you add platforms with the <code>ember cdv:platform add</code> command.</p>
+
+  <h3>For iOS</h3>
+
+  <p>In iOS, <code>ember cdv:platform add ios</code> will initialize a <a class="wrapper" target="_blank" href="https://developer.apple.com/reference/webkit/wkwebview">WKWebView</a> on your behalf, vs a <a class="wrapper" target="_blank" href="https://developer.apple.com/reference/uikit/uiwebview">UIWebView</a>.</p>
+
+  <p>The UIWebView has been a class since iOS 2, whereas WKWebView was introduced in iOS 8. It includes the newer API’s and considerable performance improvements for JS applications.</p>
+
+  <p>If you would instead like to initialize with a UIWebView, run <code>ember cdv:platform add ios --uiwebview</code>.</p>
+
+  <h3>For Android</h3>
+
+  <p>Due to the deprecate of <a class="wrapper" target="_blank" href="https://crosswalk-project.org">Crosswalk</a> and accordingly <a class="wrapper" target="_blank" href="https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview">cordova-plugin-crosswalk-webview</a>, we now use the default Android WebView.</p>
+
+  <p>Crosswalk is a custom WebView for Android, which will:</p>
+  <ul>
+    <li>ensure your app is running in the same JS environment, vs. standard Android fragmentation;</li>
+    <li>give you consistency with CSS parsing; and</li>
+    <li>Improve JS performance, especially for older devices.</li>
+  </ul>
+
+  <p>The downside of crosswalk is that builds will now give you two apks, one for each of the x86 and armv7 platforms respectively. If you are shipping via the Google Store, you can upload both apks and trust the right one will be delivered. In testing, it is important to ensure you are working from the correct apk.</p>
+
+  <p>To install crosswalk when adding a platform, simply <code>ember cdv:platform add android --crosswalk</code>.</p>
+
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

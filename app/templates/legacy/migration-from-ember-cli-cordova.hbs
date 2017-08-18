@@ -1,0 +1,31 @@
+<article class="box post post-excerpt">
+  <header>
+    <h2>Migrating from ember-cli-cordova</h2>
+  </header>
+  <hr>
+  <ul>
+    <li>Uninstall ember-cli-cordova:</li>
+  </ul>
+
+  <div><pre><code>npm uninstall ember-cli-cordova --save
+  </code></pre>
+  </div>
+
+  <ul>
+    <li>Move your existing /cordova directory to /ember-cordova/cordova.  ember-cordova is also used for hooks, and soon icon / splash management as well.</li>
+  </ul>
+
+  <div><pre><code>mkdir ember-cordova
+  mv cordova ember-cordova/
+  </code></pre>
+  </div>
+
+  <ul>
+    <li>cordova Install ember-cordova as normal and you are good to go:</li>
+  </ul>
+
+  <div><pre><code>ember install ember-cordova
+  </code></pre>
+  </div>
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

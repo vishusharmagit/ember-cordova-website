@@ -1,1 +1,366 @@
-{{outlet}}
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>CLI & Configuration</h2>
+  </header>
+  <hr>
+  <p>All commands follow the pattern <code>ember cordova:{command}</code>. <code>ember cdv:{command}</code> can be used as shorthand.</p>
+
+  <h2>Available Commands</h2>
+  <ul>
+    <li><a href="#open">ember cdv:open</a></li>
+    <li><a href="#build">ember cdv:build</a></li>
+    <li><a href="#lint-index">ember cdv:lint-index</a></li>
+    <li><a href="#platform">ember cdv:plaform</a></li>
+    <li><a href="#plugin">ember cdv:plugin</a></li>
+    <li><a href="#prepare">ember cdv:prepare</a></li>
+    <li><a href="#proxy">ember cdv:proxy</a></li>
+    <li><a href="#serve">ember cdv:serve</a></li>
+  </ul>
+
+  <p>Any arguments documented in the Cordova CLI can also be used in the <code>build</code> and <code>serve</code> commands, unless otherwise replicated in ember-cordova.</p>
+
+  <h4>Configuration / Defaults</h4>
+
+  <p>Set preferences in .ember-cli to override defaults. For example, to change ember-cordovas default platform from ios to android:</p>
+
+  <p>in .ember-cli:</p>
+
+  <div><pre><code>platform: 'android',
+  <br>reloadUrl: 'http://mycomputer:4200'
+  </code></pre>
+  </div>
+
+  <h2>Command Reference</h2>
+
+  <h3 id="open">Open</h3>
+
+  <p>Open the native platform project with the default or specified application</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>platform</td>
+        <td>ios</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>application</td>
+        <td>system default application</td>
+        <td> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="examples">Examples</h4>
+  <ul>
+    <li><code>ember cordova:open</code></li>
+    <li><code>ember cordova:open --platform=android --application=eclipse</code></li>
+  </ul>
+
+  <h3 id="build">Build</h3>
+
+  <p>Build the ember and cordova project together running in the simulator or on a device</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>environment</td>
+        <td>development</td>
+        <td>ember env</td>
+      </tr>
+      <tr>
+        <td>platform</td>
+        <td>ios</td>
+        <td>target cordova platform</td>
+      </tr>
+      <tr>
+        <td>release</td>
+        <td>debug</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>cordova-output-path</td>
+        <td>ember-cordova/cordova/www</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>skip-ember-build (alias: seb)</td>
+        <td>false</td>
+        <td>only performs cordova build</td>
+      </tr>
+      <tr>
+        <td>skip-cordova-build (alias: scb)</td>
+        <td>false</td>
+        <td>only performs ember build</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The build command also takes all of the non gradle-specific cordova build opts (e.g. provisioningProfile, codeSignIdentity).</p>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cordova:build</code></li>
+    <li><code>ember cordova:build --environment=production --platform=ios</code></li>
+    <li><code>ember cordova:build --environment=production --platform=ios --release</code></li>
+  </ul>
+
+  <h3 id="lint-index">lint-index</h3>
+
+  <p>Validates there are no leading <code>/</code> paths in ember-cordova/cordova/www/index.html.</p>
+
+  <p>While ember:cdv will validate your Ember config pre build, sometimes items such as hardcoded CND urls will slip through.</p>
+
+  <p>lint-index is automatically run on builds, however will warn vs error.</p>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cordova:lint-index</code></li>
+  </ul>
+
+  <h3 id="platform">Platform</h3>
+
+  <h4 id="description">Description</h4>
+  <p>Add or remove cordova platforms. Use the save flag to persist new
+  platforms to config.xml (default is true).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>save</td>
+        <td>true</td>
+        <td>store plugin info in <code>config.xml</code>. enables cdv:prepare</td>
+      </tr>
+      <tr>
+        <td>uiwebview</td>
+        <td>false</td>
+        <td>initialize with UIWebView vs WKWebView</td>
+      </tr>
+      <tr>
+        <td>crosswalk</td>
+        <td>false</td>
+        <td>initialize with Crosswalk vs Android WebView</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cdv:platform add ios</code></li>
+    <li><code>ember cdv:platform remove ios</code></li>
+    <li><code>ember cdv:platform add android --crosswalk</code></li>
+  </ul>
+
+  <h4 id="aliases">Aliases</h4>
+  <ul>
+    <li>add/a</li>
+    <li>remove/rm/r</li>
+  </ul>
+
+  <h3 id="plugin">Plugin</h3>
+
+  <p>Add or remove cordova plugins. Use the save flag to persist new
+  platforms to config.xml (default is true).</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>save</td>
+        <td>true</td>
+        <td>store plugin info in <code>config.xml</code>. enables cdv:prepare</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cdv:plugin add cordova-plugin-name</code></li>
+    <li><code>ember cdv:plugin rm cordova-plugin-name</code></li>
+  </ul>
+
+  <h4 id="aliases-1">Aliases</h4>
+  <ul>
+    <li>add/a</li>
+    <li>remove/rm/r</li>
+  </ul>
+
+  <h3 id="prepare">Prepare</h3>
+
+  <p>Think of cdv:prepare like npm install in a Cordova context. Installs all plugins and platforms in config.xml</p>
+
+  <p>Also fires beforePrepare/afterPrepare hooks.</p>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cordova:prepare</code></li>
+  </ul>
+
+  <h2 id="proxy">Proxy</h2>
+
+  <p>Passes commands straight to cordova, without interference.</p>
+
+  <p>Because this proxies to cordova-cli, you will need cordova-cli installed (this is not required for usage anywhere else). If you do not already have it installed, you can install it with:
+  Our hope is you won’t need this command very much. If you are, open an issue and tell us.</p>
+
+  <div><pre><code>  npm install -g cordova
+  </code></pre>
+  </div>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cdv:proxy info</code></li>
+    <li><code>ember cdv:proxy run ios --nobuild</code></li>
+  </ul>
+
+  <h4 id="troubleshooting">Troubleshooting</h4>
+
+  <p>When running a proxy command, file paths are relative to
+  your cordova directory.</p>
+
+  <p>For example, running <code>ember cdv plugin add ../local-plugin-path</code>
+  (hint: just use <code>ember cdv:plugin add ../local-plugin-path</code>), from your
+  ember projects root will probably fail. You most likely need <code>ember
+  cordova plugin add ../../../local-plugin-path</code>.</p>
+
+  <h3 id="serve">Serve</h3>
+
+  <p>Live reload. To learn more, {{#link-to 'workflow.livereload' class="wrapper"}}read here{{/link-to}}.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>platform</td>
+        <td>ios</td>
+        <td>cordova platform</td>
+      </tr>
+      <tr>
+        <td>reloadUrl</td>
+        <td>auto detected ip</td>
+        <td>network ip of your machine</td>
+      </tr>
+      <tr>
+        <td>cordova-output-path</td>
+        <td>ember-cordova/cordova/www</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>skip-ember-build (alias: seb)</td>
+        <td>false</td>
+        <td>only performs cordova build</td>
+      </tr>
+      <tr>
+        <td>skip-cordova-build (alias: scb)</td>
+        <td>false</td>
+        <td>only performs ember build</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="examples-7">Examples</h4>
+  <ul>
+    <li><code>ember cdv:serve</code></li>
+    <li><code>ember cordova:serve --platform=android --reloadUrl=192.168.1.1</code></li>
+    <li><code>ember cdv:serve --platform=browser --env "development"</code></li>
+  </ul>
+
+  <h3 id="make-icons">make-icons</h3>
+
+  <!-- <p>Automatically generate platform icons from a single svg. For more information, see <a href="/pages/generate_icon_splash">icon &amp; splash generation</a>.</p> -->
+  <p>Automatically generate platform icons from a single svg. For more information, see <a class="wrapper" target="_blank" href="http://embercordova.com/pages/generate_icon_splash">icon &amp; splash generation</a>.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>source</td>
+        <td>ember-cordova/icon.svg</td>
+        <td>splash svg</td>
+      </tr>
+      <tr>
+        <td>platform</td>
+        <td>all</td>
+        <td>platform to build assets for</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Examples</h4>
+  <ul>
+    <li><code>ember cdv:make-icons</code></li>
+  </ul>
+
+  <h3 id="make-splashes">make-splashes</h3>
+
+  <p>Automatically generate platform splashscreens from a single svg. For more information, see <a class="wrapper" target="_blank" href="http://embercordova.com/pages/generate_icon_splash">icon &amp; splash generation</a>.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Options</th>
+        <th>default</th>
+        <th>desc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>source</td>
+        <td>ember-cordova/splash.svg</td>
+        <td>splash svg</td>
+      </tr>
+      <tr>
+        <td>platform</td>
+        <td>all</td>
+        <td>platform to build assets for</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="examples-9">Examples</h4>
+  <ul>
+    <li><code>ember cdv:make-splashes</code></li>
+  </ul>
+
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

@@ -7,8 +7,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('home');
   this.route('installation');
-  this.route('livereload');
 
   this.route('workflow', function() {
     this.route('project-setup');
@@ -28,6 +28,11 @@ Router.map(function() {
     this.route('ember-cordova-events');
     this.route('ember-cordova-splash');
     this.route('ember-cordova-keyboard');
+  });
+  // this.route('home');
+
+  this.route('legacy', function() {
+    this.route('migration-from-ember-cli-cordova');
   });
 });
 

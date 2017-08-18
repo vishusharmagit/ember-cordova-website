@@ -1,1 +1,90 @@
-{{outlet}}
+<article class="box post post-excerpt">
+  <header>
+    <h2>Platform Service</h2>
+  </header>
+  <hr>
+  <h3>Summary</h3>
+
+  <p>Included in core ember-cordova repo, and provides information about the current platform. Heavily inspired and partially forked from <a class="wrapper" target="_blank" href="http://ionicframework.com/docs/api/utility/ionic.Platform/">Ionic Platform</a>.</p>
+
+  <h3>Service Lookup</h3>
+
+  <div><pre class="highlight"><code>  <span class="nx">lookup</span><span class="p">(</span><span class="s1">'service:ember-cordova/platform'</span><span class="p">);</span>
+  </code></pre>
+  </div>
+
+  <h3>API</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>navigator</td>
+        <td>proxy for window.navigator object</td>
+      </tr>
+      <tr>
+        <td>ua</td>
+        <td>proxy for window.navigator.userAgent object</td>
+      </tr>
+      <tr>
+        <td>platforms</td>
+        <td>array of all platforms found (e.g. WebView, iOS)</td>
+      </tr>
+      <tr>
+        <td>isHybrid</td>
+        <td>bool - is Cordova, PhoneGap or Crosswalk</td>
+      </tr>
+      <tr>
+        <td>isCordova</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isIPad</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isIOS</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isAndroid</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isWindowsPhone</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isEdge</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>isCrosswalk</td>
+        <td>bool</td>
+      </tr>
+      <tr>
+        <td>platform</td>
+        <td>string. either ios, android, windowsphone, edge,</td>
+      </tr>
+      <tr>
+        <td>crosswalk or navigator.platform</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>version</td>
+        <td>number</td>
+      </tr>
+      <tr>
+        <td>device</td>
+        <td>proxy for window.device</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

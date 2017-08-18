@@ -1,1 +1,44 @@
-{{outlet}}
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>Building</h2>
+  </header>
+  <hr>
+  <h4>Building the app</h4>
+
+  <p><code>ember cdv:build</code> builds the Ember app with Cordova assets injected, and then executes a Cordova build.</p>
+
+  <div><pre><code>    ember cdv:build --platform=ios --environment=production
+  </code></pre>
+  </div>
+
+  <p>ios is the default platform - to change this behaviour see the CLI reference. After building, you will need to deploy to a device or emulator for testing.</p>
+
+  <h5>Release Builds</h5>
+
+  <p>By default, ember-cordova produces debug builds. You need to add a
+  <code>--release</code> flag for Cordova release builds, see the {{#link-to 'core.cli-reference' class="wrapper"}}cli reference{{/link-to}} for more details.</p>
+
+  <h4>Deploying to a device or emulator</h4>
+
+  <p>After building the app, you can deploy to a device or emulator using <code>ember cdv run</code>, like so:</p>
+
+  <div><pre><code>  ember cdv run ios --emulator --nobuild   <span class="c"># Deploy to iOS simulator</span>
+  ember cdv run android --device --nobuild  <span class="c"># Deploy to Android device</span>
+  </code></pre>
+  </div>
+
+  <p>Alternatively <code>ember cdv:open</code> will open your project in Xcode or Android Studio. The IDE can then be used for starting emulators, code signing &amp; app store uploads.</p>
+
+  <p>To deploy to an iOS device, you must have Provisioning Profiles set up. Usually, Xcode can set up development profiles for you automatically.</p>
+
+  <h4>Debugging</h4>
+
+  <p>Android Builds can be remotely inspected in Chrome (<a class="wrapper" target="_blank" href="http://geeklearning.io/apache-cordova-and-remote-debugging-on-android/">details</a>), and iOS builds in Safari (<a class="wrapper" target="_blank" href="http://geeklearning.io/apache-cordova-and-remote-debugging-on-ios/">details</a>).</p>
+
+  <h4>Non-Cordova Builds</h4>
+
+  <p>Cordova Assets &amp; plugins will only be injected to <code>ember cdv:build/serve</code> tasks. Therefore, builds using <code>ember build</code> will not include Cordova assets and will be valid for web. The only service injected by default is {{#link-to 'core.platform-service' class="wrapper"}}the platform service{{/link-to}}.</p>
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>

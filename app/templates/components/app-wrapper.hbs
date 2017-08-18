@@ -3,16 +3,17 @@
 
 <div id="content">
   <div class="inner">
+    {{outlet}}
 
     <!-- Post -->
-      <article class="box post post-excerpt">
+      <!-- <article class="box post post-excerpt">
         <header>
           <h2><a href="#">Welcome Vishu</a></h2>
           <p class="OM">A free, UP</p>
           {{outlet}}
         </header>
 
-      </article>
+      </article> -->
 
   </div>
 </div>
@@ -27,7 +28,7 @@
     <nav id="nav">
       <ul>
         <!-- <li class="current"><a href="#">Home1</a></li> -->
-        <li>{{#link-to 'installation'}}Home{{/link-to}}</li>
+        <li>{{#link-to 'home'}}Home{{/link-to}}</li>
         <li>{{#link-to 'installation'}}Installation{{/link-to}}</li>
       </ul>
       <section>

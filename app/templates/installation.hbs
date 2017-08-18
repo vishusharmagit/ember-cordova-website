@@ -1,1 +1,73 @@
-OM
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>Installation</h2>
+    <!-- <p class="OM">A free, UP</p> -->
+  </header>
+  <hr>
+  <p>If you are migrating from ember-cli-cordova, read the {{#link-to 'legacy.migration-from-ember-cli-cordova' class="wrapper"}}migration guide{{/link-to}}.</p>
+  <h4>Requirements</h4>
+<ul>
+  <li>Ember 1.13+ or Glimmer;</li>
+  <li>node 6/7 per <a class="wrapper" target="_blank" href="http://emberjs.com/blog/2016/09/07/ember-node-lts-support.html">Ember Node LTS Support</a>;</li>
+</ul>
+
+<h4>Installation</h4>
+
+<pre><code>  ember install ember-cordova
+</code></pre>
+
+<p>Installing will initialize a cordova project within your Ember project, at ember-cordova/cordova.
+Existing Cordova projects at this path it will not be overwritten.</p>
+
+<p>You can optionally pass the following params:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>type / desc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>String (defaults to com.embercordova.)</td>
+    </tr>
+    <tr>
+      <td>cordovaid</td>
+      <td>String (defaults to your app name)</td>
+    </tr>
+    <tr>
+      <td>templatePath</td>
+      <td>String path to cordova template</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code>ember install ember-cordova --name=AppName --cordovaid=com.isleofcode.app --templatePath=../template
+</code></pre>
+
+<h4>A note on cordovaid</h4>
+<p>By default ember-cordova takes your Ember App name and generates a bundle id of com.embercordova.emberAppName.
+Android <em>requires</em> reverse domain app ids.</p>
+
+<p>By release, you should update id to com.yourdomain.foo (with real values). This is achieved by setting the <code>id</code> property on the <code>widget</code> node in the <code>ember-cordova/cordova/config.xml</code>.</p>
+
+<div><pre><code><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
+<span class="nt">&lt;widget</span> <span class="na">id=</span><span class="s">"com.myappdevcompany.phoneapp"</span> <span class="na">version=</span><span class="s">"1.0.0"</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/ns/widgets"</span> <span class="na">xmlns:cdv=</span><span class="s">"http://cordova.apache.org/ns/1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;name&gt;</span>phoneApp<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>
+        A sample Apache Cordova application that responds to the deviceready event.
+    <span class="nt">&lt;/description&gt;</span>
+ ...
+</code></pre>
+</div>
+
+
+<h4>Post Install Steps</h4>
+
+<p>Next, you will need to add platforms and make some small changes to
+your Ember app. See {{#link-to 'workflow.project-setup' class="wrapper"}}Project Setup{{/link-to}}.</p>
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

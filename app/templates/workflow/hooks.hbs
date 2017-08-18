@@ -1,1 +1,104 @@
-{{outlet}}
+<!-- OM -->
+<article class="box post post-excerpt">
+  <header>
+    <h2>Hooks</h2>
+  </header>
+  <hr>
+  <p>Use ember-cordova hooks for build-time customization, cleanup or warnings.</p>
+
+  <p>The implementation details follow <a class="wrapper" target="_blank" href="https://cordova.apache.org/docs/en/latest/guide/appdev/hooks/index.html#introduction">Cordova’s hooks</a>, but fire under different circumstances. It is possible to use Cordova hooks in addition to ember-cordova hooks.</p>
+
+  <p>To create a hook, create a file at <code>ember-cordova/hooks/&lt;hook_type&gt;.js</code> where <code>&lt;hook_type&gt;</code> is one of the following:</p>
+
+  <ul>
+    <li><code>beforeBuild</code> / <code>afterBuild</code>: fires on cdv:build and cdv:serve</li>
+    <li><code>beforePrepare</code> / <code>afterPrepare</code>: fires on cdv:prepare</li>
+  </ul>
+
+  <p><strong>A basic hook:</strong></p>
+
+  <div><pre ><code><span class="cm">/* jshint node: true */</span>
+  <span class="s2">"use strict"</span><span class="p">;</span>
+
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//do something.</span>
+  <span class="p">};</span>
+  </code></pre>
+  </div>
+
+  <p>Hooks run as tasks within the ember-cli build pipeline. To ensure consistent behaviour they should return synchronous functions or promises:</p>
+
+  <div><pre ><code><span class="cm">/* jshint node: true */</span>
+  <span class="s2">"use strict"</span><span class="p">;</span>
+  <span class="kr">import</span> <span class="nx">Promise</span> <span class="nx">from</span> <span class="s2">"ember-cli/lib/ext/promise"</span><span class="p">;</span>
+
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">//do something asynchronous.</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  </code></pre>
+  </div>
+
+  <h4>Accessing Command-Line Options</h4>
+
+  <p>Hooks are called with the <code>options</code> object generated from the command-line options. The options are named with the camelCase version of the corresponding CLI flag (<code>--skip-ember-build</code> becomes <code>skipEmberBuild</code>).</p>
+
+  <div><pre ><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">skipEmberBuild</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// do something</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  </code></pre>
+  </div>
+
+  <h4>Example customization and cleanup</h4>
+  <p>If a project needed to build for web (<code>ember build</code>) and Cordova (<code>ember cdv:build</code>), we might decide to keep the template variable <code>rootURL</code> inside “app/index.html” for the web builds.</p>
+
+  <p>Using the Ember Cordova “beforeBuild” hook we could backup the “app/index.html” file, then remove the string <code>"rootURL"</code> from it for the current build by creating the file <code>ember-cordova/hooks/beforeBuild.js</code> and writing something similar to:</p>
+
+  <div><pre ><code><span class="cm">/* jshint node: true */</span>
+  <span class="s2">"use strict"</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">fsUtils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ember-cordova/lib/utils/fs-utils'</span><span class="p">);</span>
+
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// backup the index.html file and then remove  before build.</span>
+    <span class="k">return</span> <span class="nx">fsUtils</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s1">'app/index.html'</span><span class="p">,</span> <span class="p">{</span><span class="na">encoding</span><span class="p">:</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="na">flag</span><span class="p">:</span> <span class="s1">'r'</span><span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">contents</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Backing up app/index.html'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nx">fsUtils</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'index.html~bak'</span><span class="p">,</span> <span class="nx">contents</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Creating cordova friendly "app/index.html"'</span><span class="p">);</span>
+
+            <span class="kr">const</span> <span class="nx">cordovaIndex</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">''</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+            <span class="c1">// Return a promise</span>
+            <span class="k">return</span> <span class="nx">fsUtils</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'app/index.html'</span><span class="p">,</span> <span class="nx">cordovaIndex</span><span class="p">);</span>
+          <span class="p">});</span>
+      <span class="p">});</span>
+  <span class="p">};</span>
+  </code></pre>
+  </div>
+
+  <p>Above we returned a promise so Ember Cordova and EmberCLI will wait for our promise to settle before beginning the build. If the promise is rejected the build is prevented from continuing (<em>plan accordingly for any cleanup required in your hooks when rejecting returned promises or throwing Errors</em>).</p>
+
+  <p>The Ember Cordova “afterBuild” hook will run afterwards. This could be used to restore the backed up original version for “app/index.html” by creating a file at <code>ember-cordova/hooks/afterBuild.js</code>:</p>
+
+  <div><pre ><code><span class="cm">/* jshint node: true */</span>
+  <span class="s2">"use strict"</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">fsUtils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ember-cordova/lib/utils/fs-utils'</span><span class="p">);</span>
+
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// restore the index.html file</span>
+    <span class="k">return</span> <span class="nx">fsUtils</span><span class="p">.</span><span class="nx">read</span><span class="p">(</span><span class="s1">'index.html~bak'</span><span class="p">,</span> <span class="p">{</span><span class="na">encoding</span><span class="p">:</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="na">flag</span><span class="p">:</span> <span class="s1">'r'</span><span class="p">})</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">contents</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Restoring web-friendly "app/index.html"'</span><span class="p">);</span>
+
+        <span class="c1">// Return promise</span>
+        <span class="k">return</span> <span class="nx">fsUtils</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'app/index.html'</span><span class="p">,</span> <span class="nx">contents</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">};</span>
+  </code></pre>
+  </div>
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>

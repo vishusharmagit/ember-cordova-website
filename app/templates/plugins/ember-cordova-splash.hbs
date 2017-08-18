@@ -1,1 +1,67 @@
-{{outlet}}
+
+<article class="box post post-excerpt">
+  <header>
+    <h2>ember-cordova-splash</h2>
+  </header>
+  <hr>
+  <h3>Summary</h3>
+
+  <p>An ember-service to manage splash screen displays.</p>
+
+  <p>For splash generation &amp; best practices, see {{#link-to 'workflow.icon-and-splash' class="wrapper"}}splash &amp; icon generation{{/link-to}}.</p>
+
+  <h3>Installation</h3>
+
+  <div><pre><code>ember install ember-cordova-splash
+  </code></pre>
+  </div>
+
+  <h3>Usage</h3>
+
+  <p>Service Path:</p>
+  <div><pre><code><span class="nx">lookup</span><span class="p">(</span><span class="s1">'service:ember-cordova/splash'</span><span class="p">);</span>
+  </code></pre>
+  </div>
+
+  <div><pre><code><span class="c1">// app/routes/application.js</span>
+  <span class="kr">import</span> <span class="nx">Ember</span> <span class="nx">from</span> <span class="s1">'ember'</span><span class="p">;</span>
+
+  <span class="kr">const</span> <span class="p">{</span>
+    <span class="nx">Route</span><span class="p">,</span>
+    <span class="nx">inject</span><span class="err">:</span> <span class="p">{</span> <span class="nx">service</span> <span class="p">}</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">;</span>
+
+  <span class="kr">export</span> <span class="k">default</span> <span class="nx">Route</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">splashScreenService</span><span class="p">:</span> <span class="nx">service</span><span class="p">(</span><span class="s1">'ember-cordova/splash'</span><span class="p">),</span>
+
+    <span class="nx">afterModel</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'splashScreenService'</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+  <span class="p">});</span>
+  </code></pre>
+  </div>
+
+  <h3>Service API</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>show</td>
+        <td>show the splashscreen</td>
+      </tr>
+      <tr>
+        <td>hide</td>
+        <td>hide the splashscreen</td>
+      </tr>
+    </tbody>
+  </table>
+
+</article>
+<a href="#" onclick="scrollToTop();return false">&uarr;</a>
