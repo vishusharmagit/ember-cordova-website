@@ -34,6 +34,7 @@ Router.map(function() {
   this.route('legacy', function() {
     this.route('migration-from-ember-cli-cordova');
   });
+  this.route('help');
 });
 
 export default Router;
