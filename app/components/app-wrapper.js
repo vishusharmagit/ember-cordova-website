@@ -16,6 +16,20 @@ export default Ember.Component.extend({
 					$body = $('body'),
 					$document = $(document);
 
+					// ===== Scroll to Top ====
+					$window.scroll(function() {
+					    if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+					        $('#return-to-top').fadeIn(200);    // Fade in the arrow
+					    } else {
+					        $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+					    }
+					});
+					$('#return-to-top').click(function() {      // When arrow is clicked
+					    $('body,html').animate({
+					        scrollTop : 0                       // Scroll to top of body
+					    }, 500);
+					});
+
 					// Disable animations/transitions until the page has loaded.
 					$body.addClass('is-loading');
 
@@ -53,23 +67,38 @@ export default Ember.Component.extend({
 					// Title Bar.
 					$(
 						'<div id="titleBar">' +
-							'<a href="#sidebar" class="toggle"></a>' +
+							'<a id="vishu-test" href="#sidebar" class="toggle"></a>' +
 							'<span class="title">' + $('#logo').html() + '</span>' +
 						'</div>'
 					).appendTo($body);
 
+					$( "#vishu-test" ).click(function() {
+					  // alert( "Vishu Testing." +skel.breakpoint('mobile').active);
+						$('#sidebar')
+							.panel({
+									delay: 500,
+									hideOnClick: true,
+									hideOnSwipe: true,
+									resetScroll: true,
+									resetForms: true,
+									side: 'left',
+									target: $body,
+									visibleClass: 'sidebar-visible'
+							});
+					});
+
 					// Sidebar
-					$('#sidebar')
-						.panel({
-								delay: 500,
-								hideOnClick: true,
-								hideOnSwipe: true,
-								resetScroll: true,
-								resetForms: true,
-								side: 'left',
-								target: $body,
-								visibleClass: 'sidebar-visible'
-						});
+					// $('#sidebar')
+					// 	.panel({
+					// 			delay: 500,
+					// 			hideOnClick: true,
+					// 			hideOnSwipe: true,
+					// 			resetScroll: true,
+					// 			resetForms: true,
+					// 			side: 'left',
+					// 			target: $body,
+					// 			visibleClass: 'sidebar-visible'
+					// 	});
 
 					// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
 					if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
