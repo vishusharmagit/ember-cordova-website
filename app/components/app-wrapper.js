@@ -1,7 +1,7 @@
 import Ember from 'ember';
 const { $ } = Ember;
 export default Ember.Component.extend({
-	tagName : '',//These one added for remove ember-view class. (http://stackoverflow.com/questions/23368862/ember-js-view-without-wrapping-div)
+	tagName : '',
 	didInsertElement: function(){
 			skel.breakpoints({
 				desktop: '(min-width: 737px)',
