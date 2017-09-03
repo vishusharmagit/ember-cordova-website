@@ -4,22 +4,10 @@
 <div id="content">
   <div class="inner">
     {{outlet}}
-
-    <!-- Post -->
-      <!-- <article class="box post post-excerpt">
-        <header>
-          <h2><a href="#">Welcome Vishu</a></h2>
-          <p class="OM">A free, UP</p>
-          {{outlet}}
-        </header>
-
-      </article> -->
-
   </div>
-  <a href="#" onclick="scrollToTop();return false">OM&uarr;</a>
+  <!-- <a href="#" onclick="scrollToTop();return false">OM&uarr;</a> -->
   <a href="javascript:" id="return-to-top"><span class="icon-chevron-up">&uarr;</span></a>
   <!-- <a href="javascript:" id="return-to-top">&uarr;</a> -->
-
 </div>
 
 <!-- Sidebar -->
@@ -31,7 +19,6 @@
   <!-- Nav -->
     <nav id="nav">
       <ul>
-        <!-- <li class="current"><a href="#">Home1</a></li> -->
         <li>{{#link-to 'home'}}Home{{/link-to}}</li>
         <li>{{#link-to 'installation'}}Installation{{/link-to}}</li>
       </ul>
@@ -80,5 +67,4 @@
     <ul id="copyright">
       <li>&copy; Vishu.</li><li>Design: <a href="javascript;">Ember Cordova</a></li>
     </ul>
-
 </div>
