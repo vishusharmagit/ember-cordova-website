@@ -1,14 +1,17 @@
 {
-  "name": "vishu-ember-cordova",
-  "version": "0.0.0",
-  "description": "Small description for vishu-ember-cordova goes here",
+  "name": "ember-cordova-website",
+  "version": "0.0.1",
+  "description": "Small description for ember-cordova-website goes here",
   "license": "MIT",
-  "author": "",
+  "author": "Vishu Sharma",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vishusharmagit/ember-cordova-website.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",

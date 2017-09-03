@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'vishu-ember-cordova',
+    modulePrefix: 'ember-cordova-website',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
